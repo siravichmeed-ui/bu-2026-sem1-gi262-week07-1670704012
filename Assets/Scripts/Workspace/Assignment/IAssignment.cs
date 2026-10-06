@@ -6,7 +6,7 @@ namespace Assignment
         #region Lecture
 
         int LCT01_SequentialSearch1DArray();
-
+        
         int[] LCT02_SequentialSearch2DArray();
 
         int LCT03_BinarySearch();
