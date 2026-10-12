@@ -101,17 +101,75 @@ namespace Assignment
 
         public int[] AS01_FindFirstAndLastElementOfArray(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int first = -1;
+            int last = -1;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == target)
+                {
+                    if (first == -1)
+                    {
+                        first = i;
+                    }
+
+                    last = i;
+                }
+            }
+
+            if (first == -1)
+            {
+                return new int[] { -1 };
+            }
+
+            return new int[] { first, last };
         }
 
         public int AS02_FindMaxLessThan(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int max = int.MinValue;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < target && array[i] > max)
+                {
+                    max = array[i];
+                }
+            }
+
+            if (max == int.MinValue)
+            {
+                return -1;
+            }
+
+            return max;
         }
 
         public int[] AS03_FindRange(int[] array, int min, int max)
         {
-            throw new NotImplementedException();
+            int count = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= min && array[i] <= max)
+                {
+                    count++;
+                }
+            }
+
+            int[] result = new int[count];
+            int index = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= min && array[i] <= max)
+                {
+                    result[index] = array[i];
+                    index++;
+                }
+            }
+
+            return result;
         }
 
         #endregion
@@ -120,7 +178,48 @@ namespace Assignment
 
         public int[] EX01_FindTargetEnemies(int[] enemyHPs, int mana)
         {
-            throw new NotImplementedException();
+            int[] sortedHPs = (int[])enemyHPs.Clone();
+
+            for (int i = 0; i < sortedHPs.Length - 1; i++)
+            {
+                for (int j = 0; j < sortedHPs.Length - 1 - i; j++)
+                {
+                    if (sortedHPs[j] > sortedHPs[j + 1])
+                    {
+                        int temp = sortedHPs[j];
+                        sortedHPs[j] = sortedHPs[j + 1];
+                        sortedHPs[j + 1] = temp;
+                    }
+                }
+            }
+
+            int count = 0;
+            int totalMana = 0;
+
+            for (int i = 0; i < sortedHPs.Length; i++)
+            {
+                if (totalMana + sortedHPs[i] <= mana)
+                {
+                    totalMana += sortedHPs[i];
+                    count++;
+                }
+            }
+
+            int[] result = new int[count];
+            int index = 0;
+            totalMana = 0;
+
+            for (int i = 0; i < sortedHPs.Length; i++)
+            {
+                if (totalMana + sortedHPs[i] <= mana)
+                {
+                    result[index] = sortedHPs[i];
+                    totalMana += sortedHPs[i];
+                    index++;
+                }
+            }
+
+            return result;
         }
 
         #endregion
